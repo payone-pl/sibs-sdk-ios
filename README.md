@@ -99,7 +99,6 @@ let address = try SIBS.Address.Builder()
 ###### Start payment flow:
 
 ``` swift
-// from parameter is the contextg(viewcontroller) which start the payment flow
 SIBS.SDK.shared.startPayment(from: self, with: data) { result in
     switch result {
     case .success(let data):
