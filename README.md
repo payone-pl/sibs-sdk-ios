@@ -108,3 +108,18 @@ SIBS.SDK.shared.startPayment(from: self, with: data) { result in
     }
 }
 ```
+
+## 3. Check transaction status
+
+You can always check transaction status independently, for example in case of standard payment flow was interrupted or when you need to check transaction status apart from that flow:
+
+``` swift
+SIBS.SDK.shared.check(transactionID: "transactionID") { result in
+    switch result {
+    case .success(let data):
+        print(data)
+    case .failure(let error):
+        print(error)
+    }
+}
+```
