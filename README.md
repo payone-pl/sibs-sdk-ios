@@ -11,7 +11,7 @@ Minimum deployment target is **iOS 13.0**
 
 ###### Adding dependencies
 
-Library file (SibsSDK.xcframework) should be added to the project. In order to add them, perform the following:
+Library file (**SibsSDK.xcframework**) should be added to the project. In order to add them, perform the following:
 
     select „File → Add Files To” in Xcode
     select library file
