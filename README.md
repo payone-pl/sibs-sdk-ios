@@ -1,8 +1,13 @@
-# sibs-sdk-ios
+# Sibs SDK iOS
+<br/>
 
+## Example app
+
+Check our app with example of SDK implementation: [Example app](https://github.com/payone-pl/sibs-sdk-example-ios)
+<br/><br/>
 ## 1. Project configuration
 
-Version 13.0 is the minimum requirement for the library to work properly with the iOS.
+Minimum deployment target is **iOS 13.0**
 
 ###### Adding dependencies
 
@@ -45,6 +50,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
     return true
 }
 ```
+<br/>
 
 ## 2. Transaction call
 
@@ -108,6 +114,7 @@ SIBS.SDK.shared.startPayment(from: self, with: data) { result in
     }
 }
 ```
+<br/>
 
 ## 3. Check transaction status
 
