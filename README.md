@@ -18,15 +18,17 @@ Library file (SibsSDK.xcframework) should be added to the project. In order to a
 
 Add the setting below to the configurational file Info.plist of the application:
 
-    <key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSAllowsArbitraryLoadsInWebContent</key>
-        <true/>
-    </dict>
+``` xml
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsArbitraryLoadsInWebContent</key>
+    <true/>
+</dict>
+```
 
 ###### NOTE!
 
-> The library contains anti-debug traps, so when using the library methods make sure the „Debug Executable” option is off.
+> When using the library methods make sure the „Debug Executable” option is off.
 
 
 
@@ -34,12 +36,48 @@ Add the setting below to the configurational file Info.plist of the application:
 
 Add the setting below to the AppDelegate:
 
+``` swift
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    // Override point for customization after application launch.
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    // baseURL, webURL, clientID and token shoulde be provided by SIBS
+    SIBS.SDK.configure(withBaseURL: baseURL, webURL: webURL, clientID: clientID, token: token, language: .en)
+    return true
+}
+```
 
-        // baseURL, webURL, clientID and token shoulde be provided by SIBS
-        SIBS.SDK.configure(withBaseURL: baseURL, webURL: webURL, clientID: clientID, token: token, language: .en)
-        return true
-    }
+## 2. Transaction call
 
+In order to call the transaction, the following parameters must be set using the builder for **TransactionParams**:
+
+``` swift
+do {
+    let data = try SIBS.TransactionParams.Builder()
+        .currency(.pln)
+        .amount(50.00)
+        .paymentMethods([.blik])
+        .terminalID(182)
+        .transactionID("dHJhbnNhY3Rpb25JRA")
+        .transactionDescription("Transaction description")
+        .client("Rutger Power")
+        .email("rutger.power@example.com")
+        .build()
+} catch {
+    print(error)
+}
+ ```
+ 
+or
+
+``` swift
+let data = try? SIBS.TransactionParams.Builder()
+    .currency(.pln)
+    .amount(50.00)
+    .paymentMethods([.blik])
+    .terminalID(182)
+    .transactionID("dHJhbnNhY3Rpb25JRA")
+    .transactionDescription("Transaction description")
+    .client("Rutger Power")
+    .email("rutger.power@example.com")
+    .build()
+ ```
