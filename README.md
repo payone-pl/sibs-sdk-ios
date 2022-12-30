@@ -81,3 +81,17 @@ let data = try? SIBS.TransactionParams.Builder()
     .email("rutger.power@example.com")
     .build()
  ```
+
+
+> Optionaly you can build additional parameters like **shippingAddress** and **billingAddress** by using dedicated builder:
+
+
+``` swift
+let address = try SIBS.Address.Builder()
+    .street1("Rua 123")
+    .street2("porta 2")
+    .city("Lisboa")
+    .postcode("1200-999")
+    .country("PT")
+    .build()
+```
