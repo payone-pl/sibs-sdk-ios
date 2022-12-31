@@ -46,7 +46,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
     // Override point for customization after application launch.
 
     // baseURL, webURL, clientID and token shoulde be provided by SIBS
-    SIBS.SDK.configure(withBaseURL: baseURL, webURL: webURL, clientID: clientID, token: token, language: .en)
+    SIBS.configure(withBaseURL: baseURL, webURL: webURL, clientID: clientID, token: token, language: .en)
     return true
 }
 ```
@@ -58,7 +58,7 @@ In order to call the transaction, the following parameters must be set using the
 
 ``` swift
 do {
-    let data = try SIBS.TransactionParams.Builder()
+    let data = try TransactionParams.Builder()
         .currency(.pln)
         .amount(50.00)
         .paymentMethods([.blik])
@@ -76,7 +76,7 @@ do {
 or
 
 ``` swift
-let data = try? SIBS.TransactionParams.Builder()
+let data = try? TransactionParams.Builder()
     .currency(.pln)
     .amount(50.00)
     .paymentMethods([.blik])
@@ -93,7 +93,7 @@ let data = try? SIBS.TransactionParams.Builder()
 
 
 ``` swift
-let address = try SIBS.Address.Builder()
+let address = try Address.Builder()
     .street1("Rua 123")
     .street2("porta 2")
     .city("Lisboa")
@@ -105,7 +105,7 @@ let address = try SIBS.Address.Builder()
 ###### Start payment flow:
 
 ``` swift
-SIBS.SDK.shared.startPayment(from: self, with: data) { result in
+SIBS.startPayment(from: self, with: data) { result in
     switch result {
     case .success(let data):
         print(data)
@@ -121,7 +121,7 @@ SIBS.SDK.shared.startPayment(from: self, with: data) { result in
 You can always check transaction status independently, for example in case of standard payment flow was interrupted or when you need to check transaction status apart from that flow:
 
 ``` swift
-SIBS.SDK.shared.check(transactionID: "transactionID") { result in
+SIBS.check(transactionID: "transactionID") { result in
     switch result {
     case .success(let data):
         print(data)
