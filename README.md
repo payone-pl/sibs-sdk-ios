@@ -58,6 +58,15 @@ In order to call the transaction, the following parameters must be set using the
 
 ``` swift
 do {
+    // Required for card tokenization
+    let tokenizeParams = TokenizationParams.Builder()
+        .tokenizeCard(true)
+
+    // If previous tokens are available
+    if let token = token {
+        _ = tokenizeParams.cardTokens([token])
+    }
+
     let data = try TransactionParams.Builder()
         .currency(.pln)
         .amount(50.00)
@@ -67,6 +76,7 @@ do {
         .transactionDescription("Transaction description")
         .client("Rutger Power")
         .email("rutger.power@example.com")
+        .tokenizationParams(tokenizeParams.build())
         .build()
 } catch {
     print(error)
@@ -76,6 +86,15 @@ do {
 or
 
 ``` swift
+// Required for card tokenization
+let tokenizeParams = TokenizationParams.Builder()
+    .tokenizeCard(true)
+
+// If previous tokens are available
+if let token = token {
+    _ = tokenizeParams.cardTokens([token])
+}
+
 let data = try? TransactionParams.Builder()
     .currency(.pln)
     .amount(50.00)
@@ -85,6 +104,7 @@ let data = try? TransactionParams.Builder()
     .transactionDescription("Transaction description")
     .client("Rutger Power")
     .email("rutger.power@example.com")
+    .tokenizationParams(tokenizeParams.build())
     .build()
  ```
 
