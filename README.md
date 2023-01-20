@@ -21,16 +21,6 @@ Library file (**SibsSDK.xcframework**) should be added to the project. In order 
 
 ###### Preparation of project
 
-Add the setting below to the configurational file Info.plist of the application:
-
-``` xml
-<key>NSAppTransportSecurity</key>
-<dict>
-    <key>NSAllowsArbitraryLoadsInWebContent</key>
-    <true/>
-</dict>
-```
-
 ###### NOTE!
 
 > When using the library methods make sure the „Debug Executable” option is off.
