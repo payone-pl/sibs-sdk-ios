@@ -27,18 +27,19 @@ Library file (**SibsSDK.xcframework**) should be added to the project. In order 
 
 
 
-###### SDK configuration!
+###### SDK initialization and configuration!
 
-Add the setting below to the AppDelegate:
+Add the code below to your view model/service or other place where you want to use SDK:
 
 ``` swift
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
-
-    // baseURL, webURL, clientID and token shoulde be provided by SIBS
-    SIBS.configure(withBaseURL: baseURL, webURL: webURL, clientID: clientID, token: token, language: .en)
-    return true
-}
+let sdk: SDK = SDK(
+        SDKConfig(
+            baseURL: "baseURL",
+            webURL: "webURL",
+            clientID: "clientID",
+            token: "token",
+            language: .pl
+    ))
 ```
 <br/>
 
@@ -115,7 +116,7 @@ let address = try Address.Builder()
 ###### Start payment flow:
 
 ``` swift
-SIBS.startPayment(from: self, with: data) { result in
+sdk.startPayment(from: self, with: data) { result in
     switch result {
     case .success(let data):
         print(data)
@@ -131,7 +132,7 @@ SIBS.startPayment(from: self, with: data) { result in
 You can always check transaction status independently, for example in case of standard payment flow was interrupted or when you need to check transaction status apart from that flow:
 
 ``` swift
-SIBS.check(transactionID: "transactionID") { result in
+sdk.check(transactionID: "transactionID") { result in
     switch result {
     case .success(let data):
         print(data)
